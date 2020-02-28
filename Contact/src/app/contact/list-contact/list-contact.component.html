@@ -1,0 +1,73 @@
+<div class="container">
+  <!-- Actual search box -->
+  <div class="form-group has-search" style="width: 20rem; ">
+    <span> <mat-icon>search</mat-icon><label>Search with Email Id</label></span>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search"
+      [(ngModel)]="searchname"
+    />
+  </div>
+  <div>
+    <div class="container">
+      <div style="width: 20rem;">
+        <label style="font: bold;">Contact List</label>
+        <div class="card" style="background-color: rgba(200, 234, 253, 0.26);">
+          <div
+            *ngIf="!contacts || contacts.length === 0"
+            class="alert alert-danger"
+            role="alert"
+            style="text-align: center;"
+          >
+            <p>contact list is Empty</p>
+          </div>
+          <span
+            class="border border-primary"
+            *ngIf="contacts && contacts.length > 0"
+          >
+            <div
+              *ngFor="
+                let contact of contacts | contact: searchname;
+                let i = index
+              "
+            >
+              <p>
+                <mat-icon
+                  style="color: rgb(48, 48, 223); font-size: 15px;"
+                  [routerLink]="['/edit', contact._id]"
+                  >border_color</mat-icon
+                >
+
+                {{ i + 1 }}. {{ contact.FirstName }}
+
+                <mat-icon
+                  class="heart"
+                  style="font-size: 18px;"
+                  [ngClass]="{ active: contact.isFavorite }"
+                  (click)="addasFavorite(contact)"
+                  >star_border</mat-icon
+                >
+              </p>
+              <p>
+                <mat-icon
+                  (click)="deleteContact(contact._id)"
+                  style="font-size: 15px;"
+                  >delete</mat-icon
+                >
+                {{ contact.Email }}
+              </p>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <app-favoritelist
+      *ngIf="favoriteContacts && favoriteContacts.length > 0"
+      [favList]="favoriteContacts"
+    ></app-favoritelist>
+  </div>
+</div>

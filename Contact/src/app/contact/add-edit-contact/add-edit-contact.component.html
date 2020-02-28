@@ -1,0 +1,191 @@
+<div class="container">
+  <div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:rgb(223, 228, 200); ">
+          <h2 class="modal-title" id="myModalLabel">Add/Update Contact</h2>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="registerForm" novalidate>
+            <div class="form-group">
+              <label class="col-md-4"><b>FirstName</b></label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="FirstName"
+                #FirstName
+                [(ngModel)]="contact.FirstName"
+              />
+
+              <div
+                *ngIf="
+                  registerForm.controls['FirstName'].invalid &&
+                  (registerForm.controls['FirstName'].dirty ||
+                    registerForm.controls['FirstName'].touched)
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="registerForm.controls['FirstName'].errors.required">
+                  FirstName is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4"><b>LastName</b></label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="LastName"
+                #LastName
+                [(ngModel)]="contact.LastName"
+              />
+              <div
+                *ngIf="
+                  registerForm.controls['LastName'].invalid &&
+                  (registerForm.controls['LastName'].dirty ||
+                    registerForm.controls['LastName'].touched)
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="registerForm.controls['LastName'].errors.required">
+                  LastName is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4"><b>Email</b></label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="Email"
+                #Email
+                [(ngModel)]="contact.Email"
+              />
+              <div
+                *ngIf="
+                  registerForm.controls['Email'].invalid &&
+                  (registerForm.controls['Email'].dirty ||
+                    registerForm.controls['Email'].touched)
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="registerForm.controls['Email'].errors.required">
+                  Email is required.
+                </div>
+                <div *ngIf="registerForm.controls['Email'].errors.email">
+                  Email must be a valid email address
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4"><b>Phone</b></label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="Phone"
+                #Phone
+                [(ngModel)]="contact.Phone"
+              />
+              <div
+                *ngIf="
+                  registerForm.controls['Phone'].invalid &&
+                  (registerForm.controls['Phone'].dirty ||
+                    registerForm.controls['Phone'].touched)
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="registerForm.controls['Phone'].errors.required">
+                  Phone is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4"><b>Password</b></label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="Password"
+                #Password
+                [(ngModel)]="contact.Password"
+              />
+            </div>
+            <div
+              *ngIf="
+                registerForm.controls['Password'].invalid &&
+                (registerForm.controls['Password'].dirty ||
+                  registerForm.controls['Password'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <div *ngIf="registerForm.controls['Password'].errors.required">
+                Password is required.
+              </div>
+              <div *ngIf="registerForm.controls['Password'].errors.minlength">
+                Password must be at least 6 characters
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4"><b>ConfirmPassword</b></label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="ConfirmPassword"
+                #ConfirmPassword
+                [(ngModel)]="contact.ConfirmPassword"
+              />
+            </div>
+            <div
+              *ngIf="
+                registerForm.controls['ConfirmPassword'].invalid &&
+                (registerForm.controls['ConfirmPassword'].dirty ||
+                  registerForm.controls['ConfirmPassword'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <div
+                *ngIf="registerForm.controls['ConfirmPassword'].errors.required"
+              >
+                ConfirmPassword is required.
+              </div>
+              <div
+                *ngIf="
+                  registerForm.controls['ConfirmPassword'].errors.mustMatch
+                "
+              >
+                Passwords must match
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button
+                type="submit"
+                *ngIf="!edit"
+                class="btn btn-primary"
+                routerLink="/contactlist"
+                (click)="addContact(contact)"
+                [disabled]="!registerForm.valid"
+              >
+                Add
+              </button>
+
+              <button
+                type="submit"
+                *ngIf="edit"
+                class="btn btn-primary"
+                routerLink="/contactlist"
+                (click)="updateContact(contact)"
+                [disabled]="!registerForm.valid"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

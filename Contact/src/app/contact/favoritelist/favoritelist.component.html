@@ -1,0 +1,26 @@
+<div class="container">
+  <div style="width: 20rem; ">
+    <label>Favorite Contact List</label>
+    <div class="card" style="background-color: rgba(245, 239, 223, 0.404);">
+      <span class="border border-primary">
+        <div
+          *ngIf="!favList || favList.length === 0"
+          class="alert alert-danger"
+          role="alert"
+          style="text-align: center;"
+        >
+          <p>Fav. contact list is Empty</p>
+        </div>
+
+        <div *ngIf="favList && favList.length > 0">
+          <div *ngFor="let contact of favList; let i = index">
+            <p>{{ i + 1 }}. {{ contact.FirstName }}</p>
+            <p>
+              {{ contact.Email }}
+            </p>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>
